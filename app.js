@@ -5,15 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var category = require('./routes/category');
-
 var app = express();
 
 var config = require('./.config.json'); // hidden configuration variables
 
+/***    Configure View Engine    ***/
+
+var hbs = require('hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs'); //Handlebars view engine
+hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 
 /***    Middleware for all requests    ***/
 
@@ -31,7 +32,11 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-/***    Main routes for website.  Handled in routes/ directory    ***/
+/***    Main routes for website.    ***/
+
+var index = require('./routes/index');
+var category = require('./routes/category');
+
 app.use('/', index);
 app.use('/category', category);
 
