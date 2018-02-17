@@ -6,7 +6,7 @@ router.route('/')
     .get((req, res, next) => {
         res.render('index', 
             {   title: 'Olga Anastasia Art',
-                style: '"static/css/index.css"'
+                style: 'static/css/index.css'
             }, 
             (err, html) => {
                 /* Handle errors then send html response */
