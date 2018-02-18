@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env nodejs
 
 /**
  * Module dependencies.
@@ -14,7 +14,7 @@ var http = require('http');
 
 var port;
 if (app.get('env') === 'development') {
-    port = normalizePort(process.env.DEV_PORT) || 7000 // Default development port;
+    port = normalizePort(process.env.PORT) || 7000 // Default development port;
 } else {
     port = normalizePort(process.env.PORT) || 3000 // Default production port;
 }
