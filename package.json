@@ -1,17 +1,21 @@
 {
   "name": "olga-express",
   "version": "0.1.0",
-  "private": true,
+  "private": "true",
   "author": "Connor Couetil",
   "url": "https://www.couetil.com",
   "scripts": {
-    "start": "nodejs ./bin/www"
+    "server": "nodejs ./bin/www",
+    "start": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=3000 NODE_ENV=\"production\" && env npm run mserver",
+    "test": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=3000 NODE_ENV=\"development\" && env npm run mserver",
+    "mserver": "node ./bin/www",
+    "mtest": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=1234 NODE_ENV=\"development\" && env npm run mserver"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "^4.15.5",
+    "express": "^4.16.2",
     "hbs": "~4.0.1",
     "morgan": "~1.9.0",
     "serve-favicon": "~2.4.5"
