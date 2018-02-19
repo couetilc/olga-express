@@ -1,18 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
 
 /* GET home page. */
 router.route('/')
     .get((req, res, next) => {
-        res.render('index', 
-            {   title: 'Olga Anastasia Art',
-                style: 'static/css/index.css'
-            }, 
-            (err, html) => {
-                /* Handle errors then send html response */
-                res.send(html);
-            }
-        );
+        res.render("index");
     });
 
 module.exports = router;

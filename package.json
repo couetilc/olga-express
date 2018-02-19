@@ -5,20 +5,25 @@
   "author": "Connor Couetil",
   "url": "https://www.couetil.com",
   "scripts": {
-    "server": "nodejs ./bin/www",
+    "server": "nodejs server.js",
     "start": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=3000 NODE_ENV=\"production\" && env npm run mserver",
     "test": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=3000 NODE_ENV=\"development\" && env npm run mserver",
-    "mserver": "node ./bin/www",
+    "mserver": "node server.js",
+    "mstart": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=3000 NODE_ENV=\"production\" && env npm run mserver",
     "mtest": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=1234 NODE_ENV=\"development\" && env npm run mserver"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "ejs": "^2.5.7",
     "express": "^4.16.2",
+    "express-nunjucks": "^2.2.3",
     "hbs": "~4.0.1",
     "morgan": "~1.9.0",
-    "serve-favicon": "~2.4.5"
+    "nunjucks": "^3.0.1",
+    "serve-favicon": "~2.4.5",
+    "underscore": "^1.8.3"
   },
   "repository": {
     "type": "git",

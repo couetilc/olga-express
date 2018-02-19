@@ -1,23 +1,52 @@
 var express = require('express');
 var router = express.Router();
+var _ = require('underscore');
+var path = require('path');
+var fs = require('fs');
 
-var category_list = ['mixedmedia', 'ink'];
+let read_dir = path.join(__dirname, "../public", "processed");
+let web_dir = path.join("/static/", "processed");
+let category_list = ['mixedmedia', 'watercolor', 'ink', 'sketchbook'];
+let category_files = {};
+
+category_list.forEach(category => {
+    fs.readdir(path.join(read_dir, category), (err, files) => {
+        if (err) {
+            category_files[category] = [];
+        } else {
+            category_files[category] = _.map(files, (file) => 
+                path.join(web_dir, category, file));
+        }
+    })
+});
 
 router.param('name', (req, res, next, name) => {
-    req.params = { 'category': name };
+    if (!category_list.includes(name)) {
+        req.params = { 
+            'category' : '',
+            'pic_uris': []
+        };
+    } else {
+        req.params = { 
+            'category': name,
+            'pic_uris': category_files[name]
+        };
+    }
     next();
 });
 
-/* GET <rootURL>/category/* */
+router.route('/')
+    .get((req, res, next) => {
+        let name = _.sample(category_list);
+        res.render('category', { 
+            'category': name,
+            'pic_uris': category_files[name]
+        });
+    });
+
 router.route('/:name')
     .get((req, res, next) => {
-        /* html contains the rendered string.
-         * Because the callback function is included, html is not
-         * automatically sent and the opportunity to handle errors is 
-         * provided.*/
-        res.render('category', req.params, (err, html) => {
-            res.send(html);
-        });
+        res.render('category', req.params);
     });
 
 module.exports = router;

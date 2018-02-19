@@ -5,27 +5,36 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var isDev = () => process.env.NODE_ENV !== 'production';
+
 var app = express();
 
 var config = require('./.config.json'); // hidden configuration variables
 
 /***    Configure View Engine    ***/
 
-var hbs = require('hbs');
+var nunjucks = require('nunjucks');
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs'); //Handlebars view engine
-hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
+var njkenv = nunjucks.configure(app.get('views'), {
+    autoescape: true,
+    throwOnUndefined: isDev(),
+    watch: isDev(),
+    noCache: isDev(),
+    express: app
+});
+app.engine('njk', njkenv.render);
+app.set('view engine', 'njk');
+
 
 /***    Middleware for all requests    ***/
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-// Setting app environment indicator variable.
-if (process.env.NODE_ENV === 'production') {
-    app.set('env', 'production');
-} else {
+if (isDev()) {
     app.use(logger('dev'));
     app.set('env', 'development');
+} else {
+    app.set('env', 'production');
 }
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
