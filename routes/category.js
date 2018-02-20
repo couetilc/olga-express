@@ -4,10 +4,10 @@ var _ = require('underscore');
 var path = require('path');
 var fs = require('fs');
 
-let read_dir = path.join(__dirname, "../public", "processed");
-let web_dir = path.join("/static/", "processed");
-let category_list = ['mixedmedia', 'watercolor', 'ink', 'sketchbook'];
-let category_files = {};
+var read_dir = path.join(__dirname, "../public", "processed");
+var web_dir = path.join("/static/", "processed");
+var category_list = ['mixedmedia', 'watercolor', 'ink', 'sketchbook'];
+var category_files = {};
 
 category_list.forEach(category => {
     fs.readdir(path.join(read_dir, category), (err, files) => {
@@ -37,16 +37,19 @@ router.param('name', (req, res, next, name) => {
 
 router.route('/')
     .get((req, res, next) => {
-        let name = _.sample(category_list);
+        var category = _.sample(category_list);
         res.render('category', { 
-            'category': name,
-            'pic_uris': category_files[name]
+            'category': category,
+            'pic_uris': category_files[category]
         });
     });
 
 router.route('/:name')
     .get((req, res, next) => {
-        res.render('category', req.params);
+        res.render('category', req.params, (err, html) => {
+            console.log(err);
+            res.send('hi');   
+        });
     });
 
 module.exports = router;
