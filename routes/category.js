@@ -20,21 +20,6 @@ category_list.forEach(category => {
     })
 });
 
-router.param('name', (req, res, next, name) => {
-    if (!category_list.includes(name)) {
-        req.params = { 
-            'category' : '',
-            'pic_uris': []
-        };
-    } else {
-        req.params = { 
-            'category': name,
-            'pic_uris': category_files[name]
-        };
-    }
-    next();
-});
-
 router.route('/')
     .get((req, res, next) => {
         var category = _.sample(category_list);
@@ -46,9 +31,9 @@ router.route('/')
 
 router.route('/:name')
     .get((req, res, next) => {
-        res.render('category', req.params, (err, html) => {
-            console.log(err);
-            res.send('hi');   
+        res.render('category', {
+            'category': req.params.name,
+            'pic_uris': category_files[req.params.name]
         });
     });
 
