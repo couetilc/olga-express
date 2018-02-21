@@ -1,3 +1,6 @@
+$thumb-width: 160px;
+$thumb-height: 200px;
+
 section.portfolio {
     margin: 0em 4em;
     padding: 0;
@@ -5,4 +8,25 @@ section.portfolio {
     justify-content: flex-start;
     align-items: center;
     flex-flow: row wrap;
+    
+    div.poster {
+        min-width: $thumb-width;
+        min-height: $thumb-height;
+
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            height: auto;
+            width: auto;
+            max-height: $thumb-height;
+            max-width: $thumb-width;
+        }
+    }
 }
+
+
+
+

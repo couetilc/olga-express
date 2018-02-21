@@ -22,12 +22,12 @@ category_list.forEach(category => {
 
 router.param('name', (req, res, next, name) => {
     if (!category_list.includes(name)) {
-        req.params = { 
+        req.params.data  = { 
             'category' : '',
             'pic_uris': []
         };
     } else {
-        req.params = { 
+        req.params.data = { 
             'category': name,
             'pic_uris': category_files[name]
         };
@@ -46,7 +46,10 @@ router.route('/')
 
 router.route('/:name')
     .get((req, res, next) => {
-        res.render('category', req.params);
+        res.render('category', { 
+            'category': req.params.data.category,
+            'pic_uris': category_files[req.params.data.category]
+        });
     });
 
 module.exports = router;

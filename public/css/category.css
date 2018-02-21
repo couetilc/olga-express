@@ -1,2 +1,2 @@
-section.portfolio{margin:0em 4em;padding:0;display:flex;justify-content:flex-start;align-items:center;flex-flow:row wrap}
+section.portfolio{margin:0em 4em;padding:0;display:flex;justify-content:flex-start;align-items:center;flex-flow:row wrap}section.portfolio div.poster{min-width:160px;min-height:200px;display:flex;flex-flow:column nowrap;justify-content:center;align-items:center}section.portfolio div.poster img{height:auto;width:auto;max-height:200px;max-width:160px}
 /*# sourceMappingURL=category.css.map */
