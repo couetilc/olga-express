@@ -28,7 +28,7 @@ app.set('view engine', 'njk');
 
 /***    Middleware for all requests    ***/
 
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 
 if (isDev()) {
     app.use(logger('dev'));
@@ -37,7 +37,7 @@ if (isDev()) {
     app.set('env', 'production');
 }
 
-app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

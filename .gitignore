@@ -1,6 +1,10 @@
 # contains deployment specific configuration information e.g. api keys
 .config.json
 
+# lots of images
+static/previews
+static/thumbnails
+
 # Vim usage files
 *.sw?
 
