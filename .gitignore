@@ -4,6 +4,7 @@
 # lots of images
 static/previews
 static/thumbnails
+static/optimized
 
 # Vim usage files
 *.sw?
