@@ -13,6 +13,7 @@ let category_list = ['mixedmedia', 'watercolor', 'ink', 'sketchbook'];
 const thumbnail_directory = makepath.join("static", "optimized", "thumbnails");
 const preview_directory = makepath.join("static", "optimized", "previews");
 const desktopBG_directory = makepath.join("static", "optimized", "desktopBG");
+const getRoot = env => env === 'development' ? "/dev/" : "/";
 
 
 category_list.forEach(category => {
@@ -41,7 +42,10 @@ router.route('/')
             'category': category,
             'preview_uris': _.map(preview_paths[category],
                 file => {
-                    return makepath.join("/", preview_directory, category, file);
+                    return makepath.join(getRoot(req.app.get('env')), 
+                                        preview_directory, 
+                                        category, 
+                                        file);
                 })
         });
     });
@@ -52,7 +56,10 @@ router.route('/:name')
             'category': req.params.name,
             'preview_uris': _.map(preview_paths[req.params.name],
                 file => {
-                    return makepath.join("/", preview_directory, req.params.name, file);
+                    return makepath.join(root_directory, 
+                                        preview_directory, 
+                                        req.params.name, 
+                                        file);
                 })
         });
     });
