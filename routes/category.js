@@ -56,7 +56,7 @@ router.route('/:name')
             'category': req.params.name,
             'preview_uris': _.map(preview_paths[req.params.name],
                 file => {
-                    return makepath.join(root_directory, 
+                    return makepath.join(getRoot(req.app.get('env'))
                                         preview_directory, 
                                         req.params.name, 
                                         file);
