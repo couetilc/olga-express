@@ -7,7 +7,7 @@
   "scripts": {
     "server": "nodejs server.js",
     "start": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=3000 NODE_ENV=\"production\" && env npm run server",
-    "test": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=7000 NODE_ENV=\"development\" DEBUG=\"express:*\" && env npm run server",
+    "test": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=3000 NODE_ENV=\"development\" DEBUG=\"express:*\" && env npm run server",
     "mserver": "node server.js",
     "mstart": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=3000 NODE_ENV=\"production\" && env npm run mserver",
     "mtest": "export LOCAL_IP_ADDRESS=\"localhost\" PORT=1234 NODE_ENV=\"development\" DEBUG=\"express:*\" && env npm run mserver"
