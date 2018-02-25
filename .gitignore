@@ -1,5 +1,6 @@
 # contains deployment specific configuration information e.g. api keys
 .config.json
+package-lock.json
 
 # lots of images
 static/previews
