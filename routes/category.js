@@ -1,19 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const _ = require('underscore');
-const path = require('path');
+const makepath = require('path');
 const fs = require('fs');
 const listdir = require('path-reader');
 
-const thumbnail_directory = path.join("static", "thumbnails");
-const preview_directory = path.join("static", "previews");
 let preview_paths = {};
 let thumbnail_paths = {};
+let desktopBG_paths = {};
 let category_list = ['mixedmedia', 'watercolor', 'ink', 'sketchbook'];
 
+const thumbnail_directory = makepath.join("static", "optimized", "thumbnails");
+const preview_directory = makepath.join("static", "optimized", "previews");
+const desktopBG_directory = makepath.join("static", "optimized", "desktopBG");
+const getRoot = env => env === 'development' ? "/dev/" : "/";
+
+
 category_list.forEach(category => {
-    const pdir = path.join("static", "previews", category);
-    const tdir = path.join("static", "previews", category);
+    const category_thumbnails = makepath.join(thumbnail_directory, category);
+    const category_previews = makepath.join(preview_directory, category);
+    const category_desktopBG= makepath.join(desktopBG_directory, category);
     const listDirectoryFiles = dir => {
         return listdir.files(dir,
             { 
@@ -24,20 +30,9 @@ category_list.forEach(category => {
         );
     };
 
-    preview_paths[category] = listDirectoryFiles(pdir);
-    thumbnail_paths[category] = listDirectoryFiles(tdir);
-
-    /*
-    listDirectoryFiles(pdir)
-        .then(files => {
-            preview_paths[category] = files;
-            return listDirectoryFiles(tdir);
-        })
-        .then(files => {
-            thumbnail_paths[category] = files;
-        })
-        .catch(err => console.log(err));
-    */
+    thumbnail_paths[category] = listDirectoryFiles(category_thumbnails);
+    preview_paths[category] = listDirectoryFiles(category_previews);
+    desktopBG_paths[category] = listDirectoryFiles(category_desktopBG);
 });
 
 router.route('/')
@@ -45,9 +40,12 @@ router.route('/')
         var category = _.sample(category_list);
         res.render('category', { 
             'category': category,
-            'pic_uris': _.map(preview_paths[category],
+            'preview_uris': _.map(preview_paths[category],
                 file => {
-                    return path.join("/static", "previews", category, file);
+                    return makepath.join(getRoot(req.app.get('env')), 
+                                        preview_directory, 
+                                        category, 
+                                        file);
                 })
         });
     });
@@ -56,9 +54,12 @@ router.route('/:name')
     .get((req, res, next) => {
         res.render('category', {
             'category': req.params.name,
-            'pic_uris': _.map(preview_paths[req.params.name],
+            'preview_uris': _.map(preview_paths[req.params.name],
                 file => {
-                    return path.join("/static", "previews", req.params.name, file);
+                    return makepath.join(root_directory, 
+                                        preview_directory, 
+                                        req.params.name, 
+                                        file);
                 })
         });
     });

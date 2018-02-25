@@ -22,7 +22,7 @@ body {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    z-index: -2;
+    z-index: -10;
 }
 
 nav {
@@ -146,19 +146,46 @@ section.logo {
     }
 }
 
+div.thumbnail-backgrounds {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -6;
+    opacity: 1;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    & > img {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index:-5;
+        opacity: 0;
+        transition: opacity .8s ease-in-out;
+    }
+}
+
+div.background-mask {
+    z-index: -1;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(0deg, 
+                                      rgba(0,0,0,.8), 
+                                      rgba(0,0,0,.2) 50%);
+}
+
 a.noh {
     text-decoration: none;
     color: black;
 }
 
-.fading-bg {
-    z-index: -1;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-image: linear-gradient(0deg, 
-                                      rgba(0,0,0,.8), 
-                                      rgba(0,0,0,.2) 50%);
+.visible {
+    opacity: 1 !important;
 }
 
 @media screen and (max-width: 550px) {

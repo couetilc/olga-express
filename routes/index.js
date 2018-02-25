@@ -5,7 +5,8 @@ var path = require('path');
 /* GET home page. */
 router.route('/')
     .get((req, res, next) => {
-        res.render("index");
+        res.render("index", {
+        });
     });
 
 module.exports = router;

@@ -11,13 +11,13 @@
 
 <section class="portfolio">
 
-{% for uri in pic_uris %}
+{% for preview in preview_uris %}
     <div class="poster">
-        <img src="{{ uri }}">
+        <img src="{{ preview }}">
     </div>
 {% else %}
     <h2>No pictures in the category "{{ category }}"</h2>
-    <h3><a href="/category/">Try a random category</a> or <a href="/">return home</a></h3>
+    <h3><a href="category/">Try a random category</a> or <a href="/">return home</a></h3>
 {% endfor %}
 
 </section>
