@@ -5,15 +5,18 @@
 {% endblock %}
 
 {% block body %}
+<div class="background"></div>
 
-<a href="/"><h1>Olga Anastasia Art</h1></a>
-<h2>Portfolio Section: {{ category }}</h2>
+<a href="/">
+    <img id="logo" alt="Olga Anastasia Art Logo" src="/static/img/logo-oneline-oaa_cloud.png">
+</a>
+<h2><span class="underline">{{ category }}</span> section</h2>
 
 <section class="portfolio">
 
 {% for preview in preview_uris %}
     <div class="poster">
-        <img src="{{ preview }}">
+        <img alt="Art piece from the {{ category }} category" src="{{ preview }}">
     </div>
 {% else %}
     <h2>No pictures in the category "{{ category }}"</h2>
