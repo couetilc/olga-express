@@ -13,7 +13,8 @@ let category_list = ['mixedmedia', 'watercolor', 'ink', 'sketchbook'];
 const thumbnail_directory = makepath.join("static", "optimized", "thumbnails");
 const preview_directory = makepath.join("static", "optimized", "previews");
 const desktopBG_directory = makepath.join("static", "optimized", "desktopBG");
-const getRoot = env => env === 'development' ? "/dev/" : "/";
+//const getRoot = env => env === 'development' ? "/dev/" : "/";
+const getRoot = env => "/";
 
 
 category_list.forEach(category => {
